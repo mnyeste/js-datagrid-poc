@@ -51,10 +51,17 @@
 		
 		});
 
+		function rowCount( row, cell, value, columnDef, dataContext ) {
+        	return row;
+    	};
+
 		var grid;
 		var columns = [
-    		{id: "item", name: "Item", field: "item", width: "100"},
-    		{id: "description", name: "Description", field: "description", width: "200" }];
+    		{id: "item", name: "Item", field: "item"},
+    		{id: "description", name: "Description", field: "description" },
+  			{id: "remove", name: "Remove", formatter: rowCount }
+    		
+    		];
 
   		var options = { 
   			enableColumnReorder : false
@@ -63,7 +70,8 @@
 	    var data = [
 	    	{
 	    		item: "1",
-	    		description: "one"
+	    		description: "one",
+	    		test: "fake"
 	    	}
 	    ];
 
