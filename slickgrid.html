@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<script src="./lib/jquery-1.10.2.js"></script>
+		<script src="./lib/jquery.event.drag-2.2.js"></script>
+		<script src="./lib/slick.core.js"></script>
+		<script src="./lib/slick.grid.js"></script>
+	
+	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
+	    <link rel="stylesheet" href="./css/jquery-ui-1.8.16.custom.css" type="text/css"/>
+
+	</head>
+	
+	<body>
+
+		<div id="dataGrid" style="width:400px;height:300px; border: 1px solid;"></div>
+
+		<script>
+
+		var grid;
+		var columns = [
+    		{id: "item", name: "Item", field: "item"},
+    		{id: "description", name: "Description", field: "description"}];
+
+  		var options = { 
+  			enableColumnReorder : false
+  		};
+	    
+	    var data = [
+	    	{
+	    		item: "1",
+	    		description: "one"
+	    	}
+	    ];
+
+    	grid = new Slick.Grid("#dataGrid", data, columns, options);
+
+		</script>
+
+	</body>
+
+</html>
