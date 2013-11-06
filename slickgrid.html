@@ -12,9 +12,43 @@
 	
 	<body>
 
-		<div id="dataGrid" style="width:400px;height:300px; border: 1px solid;"></div>
+		<table>
+			<tr>
+				<td>
+					<div id="dataGrid" style="width:400px;height:300px; border: 1px solid;"></div>
+				</td>
+				<td valign="top">
+					<input id="item" placeholder="item"/><br/>
+					<input id="description" placeholder="description"/><br/>
+					<input id="add" type="submit" value="Add" />
+				</td>
+			</tr>
+		</table>
+
+		
 
 		<script>
+
+		$("#add").click(function(event){
+			
+			var i = $("#item").val();
+			var d = $("#description").val();
+
+			if( i && d) {
+				console.log('add: ' + i + ' - ' + d);
+
+				var newRow = {
+					item: i,
+					description: d
+				};
+
+				data.push(newRow);
+
+				grid.invalidate();
+
+			}
+		
+		});
 
 		var grid;
 		var columns = [
