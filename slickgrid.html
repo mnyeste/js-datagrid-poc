@@ -15,12 +15,12 @@
 		<table>
 			<tr>
 				<td>
-					<div id="dataGrid" style="width:400px;height:300px; border: 1px solid;"></div>
+					<div id="dataGrid" style="width:500px;height:300px; border: 1px solid;"></div>
 				</td>
 				<td valign="top">
 					<input id="item" placeholder="item"/><br/>
 					<input id="description" placeholder="description"/><br/>
-					<input id="add" type="submit" value="Add" />
+					<input id="add" type="button" value="Add" />
 				</td>
 			</tr>
 		</table>
@@ -44,7 +44,8 @@
 
 				data.push(newRow);
 
-				grid.invalidate();
+				grid.updateRowCount();
+				grid.render();
 
 			}
 		
@@ -52,8 +53,8 @@
 
 		var grid;
 		var columns = [
-    		{id: "item", name: "Item", field: "item"},
-    		{id: "description", name: "Description", field: "description"}];
+    		{id: "item", name: "Item", field: "item", width: "100"},
+    		{id: "description", name: "Description", field: "description", width: "200" }];
 
   		var options = { 
   			enableColumnReorder : false
