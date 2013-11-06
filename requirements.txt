@@ -1,0 +1,9 @@
+Functional:
+
+- datagrid with static content
+- update data with AJAX
+- add/remove 
+
+Non-functional:
+
+- generate 1000 rows of data
