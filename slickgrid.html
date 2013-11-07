@@ -12,42 +12,33 @@
 	
 	<body>
 
-		<table>
-			<tr>
-				<td>
-					<div id="dataGrid" style="width:500px;height:300px; border: 1px solid;"></div>
-				</td>
-				<td valign="top">
-					<input id="item" placeholder="item"/><br/>
-					<input id="description" placeholder="description"/><br/>
-					<input id="add" type="button" value="Add" />
-				</td>
-			</tr>
-		</table>
+		<div>
+			<input id="add" type="button" value="Add" />
+			<input id="nrow" placeholder=" n rows"/><br/>
+		</div>
 
-		
+		<div id="dataGrid" style="width:500px;height:500px; border: 1px solid;"></div>
 
 		<script>
 
-
-
 		$("#add").click(function(event){
 			
-			var i = $("#item").val();
-			var d = $("#description").val();
+			var n = $("#nrow").val();
 
-			if( i && d) {
-				console.log('add: ' + i + ' - ' + d);
+			if( n ) {
+				console.log('add ' + n + ' row(s)');
 
-				var newRow = {
-					item: i,
-					description: d
-				};
-
-				data.push(newRow);
+				for ( var i = 0; i < n; i++ ) {
+      				
+      				rndidx = Math.floor(Math.random()*1000);
+      				data.push(testRows[rndidx]);
+      		
+				}
 
 				grid.updateRowCount();
 				grid.render();
+
+				console.log('row count: ' + data.length);
 
 			}
 		
