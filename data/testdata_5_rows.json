@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "uuid": "dfb76577-afd3-4655-87cb-e13bc46126af",
+        "company": "Capscreen",
+        "quantity": 33,
+        "price": "47.30",
+        "currency": "CHF"
+    },
+    {
+        "id": 1,
+        "uuid": "b74fd9d1-1d17-4948-8177-bb0fe0e45fd0",
+        "company": "Andryx",
+        "quantity": 76,
+        "price": "28.30",
+        "currency": "EUR"
+    },
+    {
+        "id": 2,
+        "uuid": "2daf8017-b8eb-4d6f-b271-6ec84f96634c",
+        "company": "Ozean",
+        "quantity": 29,
+        "price": "84.10",
+        "currency": "EUR"
+    },
+    {
+        "id": 3,
+        "uuid": "2b5f6543-91ea-4a80-853c-e9a1a5f49a58",
+        "company": "Medalert",
+        "quantity": 89,
+        "price": "52.50",
+        "currency": "USD"
+    },
+    {
+        "id": 4,
+        "uuid": "be3fbb5f-8a4e-45ac-8011-c99a2f7a5cdc",
+        "company": "Genekom",
+        "quantity": 19,
+        "price": "3.40",
+        "currency": "AUD"
+    }
+]

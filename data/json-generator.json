@@ -1,0 +1,13 @@
+[
+    '{{repeat(500)}}',
+    {
+        id: '{{index}}',
+        uuid: '{{guid}}',
+        company: '{{company}}',
+        quantity: '{{numeric(1,100)}}',
+        price: '{{numeric(0.1,100.0,"0.0")}}',         currency: function(idx) {
+            var choices = ['CHF', 'EUR', 'USD', 'AUD', 'NZD'];
+            return choices[this.numeric(0, choices.length - 1)];
+        }
+    }
+]

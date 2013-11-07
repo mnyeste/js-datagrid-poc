@@ -29,6 +29,8 @@
 
 		<script>
 
+
+
 		$("#add").click(function(event){
 			
 			var i = $("#item").val();
@@ -56,33 +58,38 @@
     	};
 
     	function deleteRow(index) {
-    		console.log('delete ' + index)
+    		console.log('delete row: ' + index)
+    		
     		data.splice(index,1);
+			grid.invalidate();
 
-    		grid.updateRowCount();
-			grid.render();
     	};
 
 		var grid;
 		var columns = [
-    		{id: "item", name: "Item", field: "item", width: 100},
-    		{id: "description", name: "Description", field: "description", width: 200 },
+    		{id: "company", name: "Company", field: "company", width: 200},
+    		{id: "currency", name: "Currency", field: "currency", width: 100 },
   			{id: "remove", name: "Remove", formatter: deleteRowLink, width: 100 }
-    		
     		];
 
   		var options = { 
   			enableColumnReorder : false
   		};
-	    
-	    var data = [
-	    	{
-	    		item: "1",
-	    		description: "one",
-	    	}
-	    ];
 
-    	grid = new Slick.Grid("#dataGrid", data, columns, options);
+		var data = new Array();
+
+    	var grid = new Slick.Grid("#dataGrid", data, columns, options);
+    	
+    	$.getJSON('./data/testdata_5_rows.json', function(json){
+			$.merge(data, json)
+			grid.invalidate();
+		});
+
+    	var testRows = new Array();
+
+    	$.getJSON('./data/testdata_1000_rows.json', function(json){
+			$.merge(testRows, json)
+		});
 
 		</script>
 
