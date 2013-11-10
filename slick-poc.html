@@ -4,6 +4,9 @@
 		<script src="./lib/jquery.event.drag-2.2.js"></script>
 		<script src="./lib/slick.core.js"></script>
 		<script src="./lib/slick.grid.js"></script>
+
+		<script src="./lib/testdata.js"></script>
+		<script src="./lib/slick-poc.js"></script>
 	
 	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
 		<link rel="stylesheet" href="./css/datagrid.css" type="text/css"/>
@@ -29,12 +32,7 @@
 			if( n ) {
 				console.log('add ' + n + ' row(s)');
 
-				for ( var i = 0; i < n; i++ ) {
-      				
-      				rndidx = Math.floor(Math.random()*1000);
-      				data.push(testRows[rndidx]);
-      		
-				}
+				$.merge(data,testdata.getRandomRows(n));
 
 				grid.updateRowCount();
 				grid.render();
@@ -57,6 +55,11 @@
 
     	};
 
+    	function loadInitialData(){
+    		$.merge(data,testdata.getRandomRows(5));
+			grid.invalidate();
+    	}
+
 		var grid;
 		var columns = [
     		{id: "company", name: "Company", field: "company", width: 200},
@@ -70,20 +73,11 @@
   			enableColumnReorder : false
   		};
 
-		var data = new Array();
+		var data = []; 
 
     	var grid = new Slick.Grid("#dataGrid", data, columns, options);
     	
-    	$.getJSON('./data/testdata_5_rows.json', function(json){
-			$.merge(data, json)
-			grid.invalidate();
-		});
-
-    	var testRows = new Array();
-
-    	$.getJSON('./data/testdata_1000_rows.json', function(json){
-			$.merge(testRows, json)
-		});
+    	testdata.onReady(loadInitialData);
 
 		</script>
 
