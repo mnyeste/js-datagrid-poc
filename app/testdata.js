@@ -20,13 +20,12 @@
         }
 
         return data;
-    };
-    
-    testdata.onReady = function(callback){
-        callbacks.add(callback);
     }
+    
+    testdata.initialize=function(onReady) {
 
-    function initialize() {
+        callbacks.add(onReady);
+
         console.log('Loading testdata...');
 
         $.getJSON('../data/testdata_1000_rows.json', function(json){
@@ -34,8 +33,6 @@
             console.log(dataPool.length + ' entities loaded.')
             callbacks.fire();
         });
-    }  
-
-    initialize();
+    }
 
 }( window.testdata = window.testdata || {}, jQuery ));
