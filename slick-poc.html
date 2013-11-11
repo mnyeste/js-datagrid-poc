@@ -12,7 +12,6 @@
 	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
 		<link rel="stylesheet" href="./css/datagrid.css" type="text/css"/>
 		<link rel="stylesheet" href="./css/jquery-ui-1.8.16.custom.css" type="text/css"/>
-
 	</head>
 	
 	<body>
@@ -22,13 +21,7 @@
 			<input id="nrow" placeholder=" n rows"/><br/>
 		</div>
 
-		<div id="dataGrid" style="width:800px;height:500px; border: 1px solid;"></div>
-
-		<!--script>
-			var spc = new SlickPocGrid("#dataGrid");
-
-			testdata.onReady(spc.loadInititalData);
-		</script-->
+		<div id="dataGrid" style="width:800px; border: 1px solid gray;"></div>
 
 		<script>
 
@@ -77,7 +70,8 @@
     		];
 
   		var options = { 
-  			enableColumnReorder : false
+  			enableColumnReorder : false,
+  			autoHeight: true
   		};
 
 		var data = []; 
