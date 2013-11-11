@@ -48,11 +48,17 @@
 
 		function init(){
 			grid = new Slick.Grid(divSelector, data, columns, options);	
+
+			$("#dataGrid").on('click', 'a.del', function(e){
+
+					
+				console.log('hey');
+			})
+
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext ){
-			//return '<a onclick="this.deleteRow(' + row + ')" href="javascript:void(0);">delete</a>'
-			return 'delete';
+			return '<a class= "del" id=' + row + ' href="javascript:void(0);">delete</a>'
 		}
 
 		function addRows(rows) {
