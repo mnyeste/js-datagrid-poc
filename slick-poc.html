@@ -7,7 +7,7 @@
 		<script src="./lib/slick.grid.js"></script>
 
 		<script src="./app/testdata.js"></script>
-		<!--script src="./lib/slick-poc.js"></script-->
+		<script src="./app/pocgrid.js"></script>
 	
 	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
 		<link rel="stylesheet" href="./css/datagrid.css" type="text/css"/>
@@ -25,60 +25,20 @@
 
 		<script>
 
-		$("#add").click(function(event){
-			
-			var n = $("#nrow").val();
+			$("#add").click(function(event){
+				var n = $("#nrow").val();
 
-			if( n ) {
-				console.log('add ' + n + ' row(s)');
+				if( n ) {		
+					psg.addRows(testdata.getRandomRows(n));
+				}
+			});
 
-				$.merge(data,testdata.getRandomRows(n));
+	    	var psg = new Poc.Grid("#dataGrid");
 
-				grid.updateRowCount();
-				grid.render();
+	    	testdata.initialize(function(){
+	    		psg.addRows(testdata.getRandomRows(5));
+	    	});
 
-				console.log('row count: ' + data.length);
-
-			}
-		
-		});
-
-		function deleteRowLink( row, cell, value, columnDef, dataContext ) {
-        	return '<a onclick="deleteRow(' + row + ')" href="javascript:void(0);">delete</a>'
-    	};
-
-    	function deleteRow(index) {
-    		console.log('delete row: ' + index)
-    		
-    		data.splice(index,1);
-			grid.invalidate();
-
-    	};
-
-    	function loadInitialData(){
-    		$.merge(data,testdata.getRandomRows(5));
-			grid.invalidate();
-    	}
-
-		var grid;
-		var columns = [
-    		{id: "company", name: "Company", field: "company", width: 200},
-    		{id: "currency", name: "Currency", field: "currency", width: 100 },
-			{id: "price", name: "Price", field: "price", width: 100, cssClass: "numeric" },
-			{id: "quantity", name: "Quantity", field: "quantity", width: 100, cssClass: "numeric" },
-  			{id: "remove", name: "Remove", formatter: deleteRowLink, width: 100 }
-    		];
-
-  		var options = { 
-  			enableColumnReorder : false,
-  			autoHeight: true
-  		};
-
-		var data = []; 
-
-    	var grid = new Slick.Grid("#dataGrid", data, columns, options);
-    	
-    	testdata.initialize(loadInitialData);
 
 		</script>
 
