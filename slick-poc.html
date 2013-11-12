@@ -7,7 +7,10 @@
 		<script src="./lib/slick.grid.js"></script>
 		<script src="./lib/slick.dataview.js"></script>
 
+		<script src="./lib/jquery.mockjax.js"></script>
+
 		<script src="./app/testdata.js"></script>
+		<script src="./app/testservice.js"></script>
 		<script src="./app/pocgrid.js"></script>
 	
 	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
@@ -20,6 +23,9 @@
 		<div>
 			<input id="add" type="button" value="Add" />
 			<input id="nrow" placeholder=" n rows"/><br/>
+		</div>
+		<div>
+			<input id="validate" type="button" value="Validate" />
 		</div>
 
 		<div id="dataGrid" style="width:800px; border: 1px solid gray;"></div>
@@ -34,11 +40,24 @@
 				}
 			});
 
+			$("#validate").click(function(event){
+
+				$.each(psg.getItems(),function(idx, item) {
+
+					$.getJSON('/status/'+item.id, function(response) {
+						psg.updateStatus(item.id, response.status);
+					});	
+				});
+
+			});
+
 	    	var psg = new Poc.Grid("#dataGrid");
 
 	    	testdata.initialize(function(){
 	    		psg.addRows(testdata.getRandomRows(5));
 	    	});
+
+	    	testservice.initialize();
 
 
 		</script>

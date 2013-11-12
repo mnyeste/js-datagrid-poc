@@ -104,6 +104,10 @@
 			dataView.deleteItem(itemId);
 		}
 
+		function getItems(){
+			return dataView.getItems();
+		}
+
 		function updateStatus(itemId, newStatus){
 			var item = dataView.getItemById(itemId);
 			item['status'] = newStatus;
@@ -113,6 +117,7 @@
 		$.extend(this, {
 			"addRows": addRows,
 			"deleteRow": deleteRow,
+			"getItems": getItems,
 			"updateStatus": updateStatus
 		});
 
