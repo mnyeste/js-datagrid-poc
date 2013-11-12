@@ -34,8 +34,8 @@
 			cssClass: "numeric"
 		}
 		, {
-			id: "remove",
-			name: "Remove",
+			id: "delete",
+			name: "Delete",
 			formatter: deleteLink,
 			width: 100
 		}
@@ -50,15 +50,12 @@
 			grid = new Slick.Grid(divSelector, data, columns, options);	
 
 			$("#dataGrid").on('click', 'a.del', function(e){
-
-					
-				console.log('hey');
+				deleteRow($(this).attr('rowIndex'));
 			})
-
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext ){
-			return '<a class= "del" id=' + row + ' href="javascript:void(0);">delete</a>'
+			return '<a class= "del" rowIndex=' + row + ' href="javascript:void(0);">delete</a>'
 		}
 
 		function addRows(rows) {
