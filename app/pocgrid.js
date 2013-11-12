@@ -37,7 +37,13 @@
 			name: "Delete",
 			formatter: deleteLink,
 			width: 100
-		}];
+		}, {
+			id: "status",
+			name: "Status",
+			formatter: statusIcon,
+			width: 100
+		}
+		];
 
 		var options = {
 			enableColumnReorder: false,
@@ -71,15 +77,23 @@
 			return '<a class= "del" itemId=' + dataContext.id + ' href="javascript:void(0);">delete</a>'
 		}
 
+		function statusIcon(row, cell, value, columnDef, dataContext) {
+			return '<img src="../icons/' + dataContext.status + '.png"/>'
+		}
+
 		function addRows(newItems) {
 
 			dataView.beginUpdate();
 
 			$.each(newItems, function(idx, item){
-				
+			
+
 				if (dataView.getItemById(item.id)){
 					return true;
 				}
+				
+				$.extend(item, { status: "pending" });
+
 				dataView.addItem(item);
 			})
 
