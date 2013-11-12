@@ -26,11 +26,8 @@
 
         callbacks.add(onReady);
 
-        console.log('Loading testdata...');
-
-        $.getJSON('../data/testdata_1000_rows.json', function(json){
+        $.getJSON('../data/testdata.json', function(json){
             $.merge(dataPool, json)
-            console.log(dataPool.length + ' entities loaded.')
             callbacks.fire();
         });
     }

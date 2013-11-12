@@ -1,5 +1,5 @@
 [
-    '{{repeat(500)}}',
+    '{{repeat(10000)}}',
     {
         id: '{{index}}',
         uuid: '{{guid}}',

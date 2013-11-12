@@ -32,40 +32,62 @@
 			field: "quantity",
 			width: 100,
 			cssClass: "numeric"
-		}
-		, {
+		}, {
 			id: "delete",
 			name: "Delete",
 			formatter: deleteLink,
 			width: 100
-		}
-		];
+		}];
 
 		var options = {
 			enableColumnReorder: false,
 			autoHeight: true
 		};
 
-		function init(){
-			grid = new Slick.Grid(divSelector, data, columns, options);	
+		var dataView;
 
-			$("#dataGrid").on('click', 'a.del', function(e){
-				deleteRow($(this).attr('rowIndex'));
+		function init() {
+
+			dataView = new Slick.Data.DataView();
+
+			grid = new Slick.Grid(divSelector, dataView, columns, options);
+
+			dataView.onRowCountChanged.subscribe(function(e, args) {
+				grid.updateRowCount();
+				grid.render();
+			});
+
+			dataView.onRowsChanged.subscribe(function(e, args) {
+				grid.invalidateRows(args.rows);
+				grid.render();
+			});
+
+			$("#dataGrid").on('click', 'a.del', function(e) {
+				deleteRow($(this).attr('itemId'));
 			})
 		}
 
-		function deleteLink(row, cell, value, columnDef, dataContext ){
-			return '<a class= "del" rowIndex=' + row + ' href="javascript:void(0);">delete</a>'
+		function deleteLink(row, cell, value, columnDef, dataContext) {
+			return '<a class= "del" itemId=' + dataContext.id + ' href="javascript:void(0);">delete</a>'
 		}
 
-		function addRows(rows) {
-			$.merge(data, rows);
-			grid.invalidate();
+		function addRows(newItems) {
+
+			dataView.beginUpdate();
+
+			$.each(newItems, function(idx, item){
+				
+				if (dataView.getItemById(item.id)){
+					return true;
+				}
+				dataView.addItem(item);
+			})
+
+			dataView.endUpdate();
 		}
 
-		function deleteRow(index) {
-			data.splice(index,1);
-			grid.invalidate();
+		function deleteRow(itemId) {
+			dataView.deleteItem(itemId);
 		}
 
 		$.extend(this, {
@@ -73,6 +95,6 @@
 			"deleteRow": deleteRow
 		});
 
-		init();	
+		init();
 	}
 }(jQuery));
