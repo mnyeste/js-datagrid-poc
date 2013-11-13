@@ -10,4 +10,10 @@ div.icon {
 input.edit-quantity {
 	width: 80px;
 	height: 16px;
+	text-align: right;
+}
+
+select.select-currency {
+	width: 80px;
+	height: 25px;
 }

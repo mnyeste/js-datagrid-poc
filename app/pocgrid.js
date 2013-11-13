@@ -18,7 +18,7 @@
 		}, {
 			id: "currency",
 			name: "Currency",
-			field: "currency",
+			formatter: selectCurrency,
 			width: 100
 		}, {
 			id: "price",
@@ -95,6 +95,20 @@
 
 			})
 
+			$("#dataGrid").on('change', 'select.select-currency', function(e) {
+				
+				var itemId = $(this).attr('itemId');
+				var newVal = $(this).val() 
+
+				var item = dataView.getItemById(itemId);
+
+				if (item) {
+					item['currency'] = newVal;
+					dataView.updateItem(item['id'], item)
+				}
+
+			})
+
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext) {
@@ -109,6 +123,19 @@
 			return '<input class="edit-quantity" itemId=' + dataContext.id + ' type="text" value="' + dataContext.quantity + '">'
 		}
 
+		function selectCurrency(row, cell, value, columnDef, dataContext) {
+
+			var select = '<select class="select-currency" itemId=' + dataContext.id + '>';
+			$.each(dataContext.currencies, function(idx, currency){
+
+				select += '<option value="'+ currency + '" ' + (dataContext.currency === currency?'selected':'') + '>'+currency+'</option>'
+
+			})
+			select += '</select>'
+
+			return select;
+		}
+
 		function addItems(newItems) {
 
 			dataView.beginUpdate();
@@ -121,7 +148,8 @@
 				}
 
 				$.extend(item, {
-					status: "pending"
+					status: "pending",
+					currencies: ['CHF', 'EUR', 'USD', 'AUD', 'NZD']
 				});
 
 				dataView.addItem(item);
