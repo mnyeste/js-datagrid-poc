@@ -1,0 +1,8 @@
+./start_http_server.sh
+
+http://localhost:9000/slick-poc.html
+
+Try: 
+
+ - Add some rows
+ - Start validtation, watch result

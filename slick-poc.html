@@ -32,6 +32,7 @@
 
 		<script>
 
+			// ref[5] add items to DataView
 			$("#add").click(function(event){
 				var n = $("#nrow").val();
 
@@ -40,11 +41,13 @@
 				}
 			});
 
+			// ref[7] start validation of each item
 			$("#validate").click(function(event){
 
 				$.each(psg.getItems(),function(idx, item) {
 
 					$.getJSON('/status/'+item.id, function(response) {
+						// ref[8] upate status when answer received
 						psg.updateItemStatus(item.id, response.status);
 					});	
 				});

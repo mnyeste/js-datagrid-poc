@@ -65,24 +65,29 @@
 
 		function init() {
 
+			// ref[1] use DataView to store data
 			dataView = new Slick.Data.DataView();
 
 			grid = new Slick.Grid(divSelector, dataView, columns, options);
 
+			// ref[2] render grid on DataView change
 			dataView.onRowCountChanged.subscribe(function(e, args) {
 				grid.updateRowCount();
 				grid.render();
 			});
 
+			// ref[2] render grid on DataView change
 			dataView.onRowsChanged.subscribe(function(e, args) {
 				grid.invalidateRows(args.rows);
 				grid.render();
 			});
 
+			// ref[6] handle delete, remove data from DataView
 			$("#dataGrid").on('click', 'a.del', function(e) {
 				deleteRow($(this).attr('data-item-id'));
 			})
 
+			// ref[4] handle custom input changes, updating DataView
 			$("#dataGrid").on('change', 'input.edit-quantity', function(e) {
 				updateItemOnInputChange($(this), 'quantity');		
 			})
@@ -106,6 +111,7 @@
 				}
 		}
 
+		// ref[6] generate link with ID, note data-item-id
 		function deleteLink(row, cell, value, columnDef, dataContext) {
 			return '<a class="del" data-item-id=' + dataContext.id + ' href="javascript:void(0);"><img src="../icons/delete.png"></a>'
 		}
@@ -114,10 +120,12 @@
 			return '<img src="../icons/' + dataContext.status + '.png"/>'
 		}
 
+		// ref[3] generate custom editors
 		function editQuantity(row, cell, value, columnDef, dataContext) {
 			return '<input class="edit-quantity" data-item-id=' + dataContext.id + ' type="text" value="' + dataContext.quantity + '">'
 		}
 
+		// ref[3] generate custom editors
 		function selectCurrency(row, cell, value, columnDef, dataContext) {
 
 			if (dataContext.currencies.length === 1){
@@ -164,6 +172,7 @@
 			return dataView.getItems();
 		}
 
+		// ref[2]
 		function updateItemStatus(itemId, newStatus) {
 			var item = dataView.getItemById(itemId);
 
