@@ -42,8 +42,7 @@
 			name: "Status",
 			formatter: statusIcon,
 			width: 100
-		}
-		];
+		}];
 
 		var options = {
 			enableColumnReorder: false,
@@ -81,18 +80,20 @@
 			return '<img src="../icons/' + dataContext.status + '.png"/>'
 		}
 
-		function addRows(newItems) {
+		function addItems(newItems) {
 
 			dataView.beginUpdate();
 
-			$.each(newItems, function(idx, item){
-			
+			$.each(newItems, function(idx, item) {
 
-				if (dataView.getItemById(item.id)){
+
+				if (dataView.getItemById(item.id)) {
 					return true;
 				}
-				
-				$.extend(item, { status: "pending" });
+
+				$.extend(item, {
+					status: "pending"
+				});
 
 				dataView.addItem(item);
 			})
@@ -104,21 +105,23 @@
 			dataView.deleteItem(itemId);
 		}
 
-		function getItems(){
+		function getItems() {
 			return dataView.getItems();
 		}
 
-		function updateStatus(itemId, newStatus){
+		function updateItemStatus(itemId, newStatus) {
 			var item = dataView.getItemById(itemId);
-			item['status'] = newStatus;
-			dataView.updateItem(itemId, item)	
+
+			if (item) {
+				item['status'] = newStatus;
+				dataView.updateItem(itemId, item)
+			}
 		}
 
 		$.extend(this, {
-			"addRows": addRows,
-			"deleteRow": deleteRow,
+			"addItems": addItems,
 			"getItems": getItems,
-			"updateStatus": updateStatus
+			"updateItemStatus": updateItemStatus
 		});
 
 		init();

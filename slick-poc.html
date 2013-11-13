@@ -36,7 +36,7 @@
 				var n = $("#nrow").val();
 
 				if( n ) {		
-					psg.addRows(testdata.getRandomRows(n));
+					psg.addItems(testdata.getRandomRows(n));
 				}
 			});
 
@@ -45,7 +45,7 @@
 				$.each(psg.getItems(),function(idx, item) {
 
 					$.getJSON('/status/'+item.id, function(response) {
-						psg.updateStatus(item.id, response.status);
+						psg.updateItemStatus(item.id, response.status);
 					});	
 				});
 
@@ -54,7 +54,7 @@
 	    	var psg = new Poc.Grid("#dataGrid");
 
 	    	testdata.initialize(function(){
-	    		psg.addRows(testdata.getRandomRows(5));
+	    		psg.addItems(testdata.getRandomRows(25));
 	    	});
 
 	    	testservice.initialize();
