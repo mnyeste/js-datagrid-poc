@@ -2,49 +2,31 @@
 
     testservice.initialize = function() {
 
-        $.mockjax({
-            url: /^\/status\/([\d]+)$/,
-            urlParams: ['itemId'],
-            response: function(settings) {
-                var itemId = settings.urlParams.itemId;
+        function createResponse(settings) {
+            var itemId = settings.urlParams.itemId;
 
-                var statusList = ['ok', 'warn'];
-                var rndidx = Math.floor(Math.random() * statusList.length);
+            var statusList = ['ok', 'warn'];
+            var rndidx = Math.floor(Math.random() * statusList.length);
 
-                this.responseText = {
-                    id: itemId,
-                    status: statusList[rndidx]
-                }
+            this.responseText = {
+                id: itemId,
+                status: statusList[rndidx]
             }
-        });
+        }
 
+        $.mockjaxClear();
 
+        for (var i = 1; i <= 9; ++i) {
 
-        $.mockjax(function(settings) {
-            // settings.url == '/restful/<service>'
-            var service = settings.url.match(/^\/lazystatus\/([\d]+)$/);
-            if (service) {
+            var urlMatcher = new RegExp('^\\/status\\/' + i + '([\\d]+)$');
 
-                var delay = Math.floor(Math.random() * 10000);
-
-                return {
-                    urlParams: ['itemId'],
-                    responseTime: delay,
-                    response: function(settings) {
-                        var itemId = settings.urlParams.itemId;
-
-                        var statusList = ['ok', 'warn'];
-                        var rndidx = Math.floor(Math.random() * statusList.length);
-
-                        this.responseText = {
-                            id: itemId,
-                            status: statusList[rndidx]
-                        }
-                    } 
-                };
-            }
-            return;
-        });
+            $.mockjax({
+                url: urlMatcher,
+                urlParams: ['itemId'],
+                responseTime: (i-1)*1000,
+                response: createResponse
+            });
+        }
 
     }
 
