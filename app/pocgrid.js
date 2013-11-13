@@ -35,11 +35,13 @@
 		}, {
 			id: "delete",
 			name: "Delete",
+			cssClass: "icon",
 			formatter: deleteLink,
 			width: 100
 		}, {
 			id: "status",
 			name: "Status",
+			cssClass: "icon",
 			formatter: statusIcon,
 			width: 100
 		}];
@@ -73,7 +75,7 @@
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext) {
-			return '<a class= "del" itemId=' + dataContext.id + ' href="javascript:void(0);">delete</a>'
+			return '<a class= "del" itemId=' + dataContext.id + ' href="javascript:void(0);"><img src="../icons/delete.png"></a>'
 		}
 
 		function statusIcon(row, cell, value, columnDef, dataContext) {
