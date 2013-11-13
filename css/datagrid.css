@@ -6,3 +6,8 @@ div.numeric {
 div.icon {
 	text-align: center;
 }
+
+input.edit-quantity {
+	width: 80px;
+	height: 16px;
+}
