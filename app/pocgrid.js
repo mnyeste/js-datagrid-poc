@@ -81,34 +81,26 @@
 			})
 
 			$("#dataGrid").on('change', 'input.edit-quantity', function(e) {
-				
-
-				var itemId = $(this).attr('itemId');
-				var newVal = $(this).val() 
-
-				var item = dataView.getItemById(itemId);
-
-				if (item) {
-					item['quantity'] = newVal;
-					dataView.updateItem(item['id'], item)
-				}
-
+				updateItemOnInputChange($(this), 'quantity');		
 			})
 
 			$("#dataGrid").on('change', 'select.select-currency', function(e) {
-				
-				var itemId = $(this).attr('itemId');
-				var newVal = $(this).val() 
+				updateItemOnInputChange($(this), 'currency');
+			})
+
+		}
+
+		function updateItemOnInputChange(input, field) {
+
+				var itemId = input.attr('itemId');
+				var newVal = input.val() 
 
 				var item = dataView.getItemById(itemId);
 
 				if (item) {
-					item['currency'] = newVal;
+					item[field] = newVal;
 					dataView.updateItem(item['id'], item)
 				}
-
-			})
-
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext) {
@@ -127,9 +119,7 @@
 
 			var select = '<select class="select-currency" itemId=' + dataContext.id + '>';
 			$.each(dataContext.currencies, function(idx, currency){
-
 				select += '<option value="'+ currency + '" ' + (dataContext.currency === currency?'selected':'') + '>'+currency+'</option>'
-
 			})
 			select += '</select>'
 
