@@ -50,6 +50,9 @@
 			name: "ID",
 			field: "id",
 			width: 100
+		}, {
+			id: 'lipsum',
+			field: 'lipsum'
 		}];
 
 		var options = {
@@ -77,7 +80,7 @@
 			});
 
 			$("#dataGrid").on('click', 'a.del', function(e) {
-				deleteRow($(this).attr('itemId'));
+				deleteRow($(this).attr('data-item-id'));
 			})
 
 			$("#dataGrid").on('change', 'input.edit-quantity', function(e) {
@@ -92,7 +95,7 @@
 
 		function updateItemOnInputChange(input, field) {
 
-				var itemId = input.attr('itemId');
+				var itemId = input.attr('data-item-id');
 				var newVal = input.val() 
 
 				var item = dataView.getItemById(itemId);
@@ -104,7 +107,7 @@
 		}
 
 		function deleteLink(row, cell, value, columnDef, dataContext) {
-			return '<a class="del" itemId=' + dataContext.id + ' href="javascript:void(0);"><img src="../icons/delete.png"></a>'
+			return '<a class="del" data-item-id=' + dataContext.id + ' href="javascript:void(0);"><img src="../icons/delete.png"></a>'
 		}
 
 		function statusIcon(row, cell, value, columnDef, dataContext) {
@@ -112,12 +115,12 @@
 		}
 
 		function editQuantity(row, cell, value, columnDef, dataContext) {
-			return '<input class="edit-quantity" itemId=' + dataContext.id + ' type="text" value="' + dataContext.quantity + '">'
+			return '<input class="edit-quantity" data-item-id=' + dataContext.id + ' type="text" value="' + dataContext.quantity + '">'
 		}
 
 		function selectCurrency(row, cell, value, columnDef, dataContext) {
 
-			var select = '<select class="select-currency" itemId=' + dataContext.id + '>';
+			var select = '<select class="select-currency" data-item-id=' + dataContext.id + '>';
 			$.each(dataContext.currencies, function(idx, currency){
 				select += '<option value="'+ currency + '" ' + (dataContext.currency === currency?'selected':'') + '>'+currency+'</option>'
 			})
@@ -139,7 +142,8 @@
 
 				$.extend(item, {
 					status: "pending",
-					currencies: ['CHF', 'EUR', 'USD', 'AUD', 'NZD']
+					currencies: ['CHF', 'EUR', 'USD', 'AUD', 'NZD'],
+					lipsum: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent neque erat, faucibus id purus a, tempor commodo velit. Integer ac dui elit. Ut non tellus vitae lacus venenatis molestie. Donec nec ligula vestibulum tortor fringilla mollis. Nunc eget iaculis elit. Nullam convallis, velit vitae tincidunt hendrerit, enim tellus aliquam urna, non molestie sapien leo quis metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam viverra lacus id volutpat.'
 				});
 
 				dataView.addItem(item);
