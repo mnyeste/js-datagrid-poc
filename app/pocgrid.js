@@ -120,6 +120,10 @@
 
 		function selectCurrency(row, cell, value, columnDef, dataContext) {
 
+			if (dataContext.currencies.length === 1){
+				return dataContext.currencies[0];
+			}
+
 			var select = '<select class="select-currency" data-item-id=' + dataContext.id + '>';
 			$.each(dataContext.currencies, function(idx, currency){
 				select += '<option value="'+ currency + '" ' + (dataContext.currency === currency?'selected':'') + '>'+currency+'</option>'
