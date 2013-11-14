@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="./lib/jquery-1.10.2.js"></script>
+		<script src="./lib/jquery.event.drag-2.2.js"></script>
+		<script src="./lib/slick.core.js"></script>
+		<script src="./lib/slick.grid.js"></script>
+
+		<script src="./lib/jquery.mockjax.js"></script>
+
+		<script src="./app/testdata.js"></script>
+		<script src="./app/pocdataprovider.js"></script>
+	
+	    <link rel="stylesheet" href="./css/slick.grid.css" type="text/css"/>
+		<link rel="stylesheet" href="./css/datagrid.css" type="text/css"/>
+		<link rel="stylesheet" href="./css/jquery-ui-1.8.16.custom.css" type="text/css"/>
+	</head>
+	
+	<body>
+
+		<div id="dataGrid" style="width:900px; height: 600px; border: 1px solid gray;"></div>
+
+		<script>
+
+		data = [
+		    {
+		        "id": 0,
+		        "uuid": "18ed1d78-1527-4823-8780-472529b2f30e",
+		        "company": "Boilicon",
+		        "quantity": 8,
+		        "price": "12.50",
+		        "currency": "AUD",
+		        "lipsum": "lipsum"
+		    },
+		    {
+		        "id": 1,
+		        "uuid": "f9921508-3e80-4f70-9223-f6562c951c68",
+		        "company": "Idetica",
+		        "quantity": 87,
+		        "price": "76.50",
+		        "currency": "USD",
+		        "lipsum": "long text"
+		    }];
+
+		var dataProvider = new Poc.DataProvider(data);
+
+		var columns = [
+		{id: "company", name: "Company", field: "company"}, 
+		{id: "currency", name: "Currency", field: "currency"},
+		{id: "price", name: "Price", field: "price"}, 
+		{id: "quantity", name: "Quantity", field: "quantity"}, 
+		{id: "status", name: "Status", field: "status"}, 
+		{id: "internal_id", name: "ID", field: "id" },
+		{id: 'lipsum', name: "Lipsum",field: 'lipsum'}];
+
+		var options = {
+			enableColumnReorder: false
+		};
+
+		grid = new Slick.Grid("#dataGrid", dataProvider, columns, options);
+
+
+		</script>
+
+	</body>
+
+</html>
