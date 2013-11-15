@@ -17,3 +17,7 @@ select.select-currency {
 	width: 80px;
 	height: 25px;
 }
+
+.slick-cell {
+	font-size: 15px;
+}

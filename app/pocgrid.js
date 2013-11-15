@@ -50,14 +50,10 @@
 			name: "ID",
 			field: "id",
 			width: 100
-		}, {
-			id: 'lipsum',
-			field: 'lipsum'
 		}];
 
 		var options = {
 			enableColumnReorder: false,
-			autoHeight: true,
 			editable: false
 		};
 
